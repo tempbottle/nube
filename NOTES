@@ -1,0 +1,9 @@
+Requirements:
+Boost 1.41
+GLog (Google's C++ log facility) 0.3.3
+
+Notes:
+I'd like to keep the logging as simple as possible. Maybe implementing a simple log (see header log.hpp)
+This will require using boost::mutex for atomic thread safe operations.
+
+The whole code required review even for achieving at least a beta level.

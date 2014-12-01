@@ -18,9 +18,6 @@
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
 #include "server.hpp"
-
-#if !defined(_WIN32)
-
 #include <pthread.h>
 #include <signal.h>
 #include <glog/logging.h>
@@ -80,5 +77,3 @@ int main(int argc, char* argv[])
 
   return 0;
 }
-
-#endif // !defined(_WIN32)

@@ -1,5 +1,7 @@
+//
 // Dr.Dobbs very small logging and template based header
 // See: http://stackoverflow.com/questions/5028302/small-logger-class
+//
 
 #ifndef __LOG_H__
 #define __LOG_H__

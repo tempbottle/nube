@@ -23,9 +23,15 @@
 
 #include <pthread.h>
 #include <signal.h>
+#include <glog/logging.h>
 
 int main(int argc, char* argv[])
 {
+  // Using glog for logging
+  google::InitGoogleLogging(argv[0]);
+
+  LOG(INFO) << "Nube is starting..";
+
   try
   {
     // Check command line arguments.

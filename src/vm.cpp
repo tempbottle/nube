@@ -1,9 +1,17 @@
+//
+// Nube
+//
+// a cloud scripting server based in google v8 and boost libraries.
+// nube means cloud in spanish.
+//
+
 #include "include/v8.h"
 #include "include/libplatform/libplatform.h"
 
 using namespace v8;
 
 int main(int argc, char* argv[]) {
+
   // Initialize V8.
   V8::InitializeICU();
   Platform* platform = platform::CreateDefaultPlatform();

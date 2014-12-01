@@ -1,15 +1,18 @@
 //
-// connection.hpp
-// ~~~~~~~~~~~~~~
+// Nube
 //
+// A cloud scripting server based in Google V8 and Boost libraries.
+// Nube means cloud in Spanish.
+//
+// Based on original work by:
 // Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef HTTP_SERVER3_CONNECTION_HPP
-#define HTTP_SERVER3_CONNECTION_HPP
+#ifndef HTTP_NUBE_CONNECTION_HPP
+#define HTTP_NUBE_CONNECTION_HPP
 
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
@@ -22,7 +25,7 @@
 #include "request_parser.hpp"
 
 namespace http {
-namespace server3 {
+namespace nube {
 
 /// Represents a single connection from a client.
 class connection
@@ -72,7 +75,7 @@ private:
 
 typedef boost::shared_ptr<connection> connection_ptr;
 
-} // namespace server3
+} // namespace nube
 } // namespace http
 
-#endif // HTTP_SERVER3_CONNECTION_HPP
+#endif // HTTP_NUBE_CONNECTION_HPP

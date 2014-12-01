@@ -1,7 +1,10 @@
 //
-// connection.cpp
-// ~~~~~~~~~~~~~~
+// Nube
 //
+// A cloud scripting server based in Google V8 and Boost libraries.
+// Nube means cloud in Spanish.
+//
+// Based on original work by:
 // Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -14,7 +17,7 @@
 #include "request_handler.hpp"
 
 namespace http {
-namespace server3 {
+namespace nube {
 
 connection::connection(boost::asio::io_service& io_service,
     request_handler& handler)
@@ -94,5 +97,5 @@ void connection::handle_write(const boost::system::error_code& e)
   // destructor closes the socket.
 }
 
-} // namespace server3
+} // namespace nube
 } // namespace http

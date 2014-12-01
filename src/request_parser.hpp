@@ -1,21 +1,24 @@
 //
-// request_parser.hpp
-// ~~~~~~~~~~~~~~~~~~
+// Nube
 //
+// A cloud scripting server based in Google V8 and Boost libraries.
+// Nube means cloud in Spanish.
+//
+// Based on original work by:
 // Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef HTTP_SERVER3_REQUEST_PARSER_HPP
-#define HTTP_SERVER3_REQUEST_PARSER_HPP
+#ifndef HTTP_NUBE_REQUEST_PARSER_HPP
+#define HTTP_NUBE_REQUEST_PARSER_HPP
 
 #include <boost/logic/tribool.hpp>
 #include <boost/tuple/tuple.hpp>
 
 namespace http {
-namespace server3 {
+namespace nube {
 
 struct request;
 
@@ -90,7 +93,7 @@ private:
   } state_;
 };
 
-} // namespace server3
+} // namespace nube
 } // namespace http
 
-#endif // HTTP_SERVER3_REQUEST_PARSER_HPP
+#endif // HTTP_NUBE_REQUEST_PARSER_HPP

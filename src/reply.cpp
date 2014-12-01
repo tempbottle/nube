@@ -1,7 +1,10 @@
 //
-// reply.cpp
-// ~~~~~~~~~
+// Nube
 //
+// A cloud scripting server based in Google V8 and Boost libraries.
+// Nube means cloud in Spanish.
+//
+// Based on original work by:
 // Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -13,7 +16,7 @@
 #include <boost/lexical_cast.hpp>
 
 namespace http {
-namespace server3 {
+namespace nube {
 
 namespace status_strings {
 
@@ -252,5 +255,5 @@ reply reply::stock_reply(reply::status_type status)
   return rep;
 }
 
-} // namespace server3
+} // namespace nube
 } // namespace http

@@ -1,11 +1,14 @@
 //
-// server.cpp
-// ~~~~~~~~~~
+// Nube
 //
-// Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// a cloud scripting server based in google v8 and boost libraries.
+// nube means cloud in spanish.
 //
-// Distributed under the Boost Software License, Version 1.0. (See accompanying
-// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+// based on original work by:
+// copyright (c) 2003-2008 christopher m. kohlhoff (chris at kohlhoff dot com)
+//
+// distributed under the boost software license, version 1.0. (see accompanying
+// file license_1_0.txt or copy at http://www.boost.org/license_1_0.txt)
 //
 
 #include "server.hpp"
@@ -17,7 +20,7 @@
 
 
 namespace http {
-namespace server3 {
+namespace nube {
 
 server::server(const std::string& address, const std::string& port,
     const std::string& doc_root, std::size_t thread_pool_size)
@@ -72,5 +75,5 @@ void server::handle_accept(const boost::system::error_code& e)
   }
 }
 
-} // namespace server3
+} // namespace nube
 } // namespace http

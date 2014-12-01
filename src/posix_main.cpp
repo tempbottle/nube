@@ -1,7 +1,10 @@
 //
-// posix_main.cpp
-// ~~~~~~~~~~~~~~
+// Nube
 //
+// A cloud scripting server based in Google V8 and Boost libraries.
+// Nube means cloud in Spanish.
+//
+// Based on original work by:
 // Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -44,8 +47,8 @@ int main(int argc, char* argv[])
 
     // Run server in background thread.
     std::size_t num_threads = boost::lexical_cast<std::size_t>(argv[3]);
-    http::server3::server s(argv[1], argv[2], argv[4], num_threads);
-    boost::thread t(boost::bind(&http::server3::server::run, &s));
+    http::nube::server s(argv[1], argv[2], argv[4], num_threads);
+    boost::thread t(boost::bind(&http::nube::server::run, &s));
 
     // Restore previous signals.
     pthread_sigmask(SIG_SETMASK, &old_mask, 0);

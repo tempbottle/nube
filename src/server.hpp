@@ -1,15 +1,18 @@
 //
-// server.hpp
-// ~~~~~~~~~~
+// Nube
 //
+// A cloud scripting server based in Google V8 and Boost libraries.
+// Nube means cloud in Spanish.
+//
+// Based on original work by:
 // Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef HTTP_SERVER3_SERVER_HPP
-#define HTTP_SERVER3_SERVER_HPP
+#ifndef HTTP_NUBE_SERVER_HPP
+#define HTTP_NUBE_SERVER_HPP
 
 #include <boost/asio.hpp>
 #include <string>
@@ -20,7 +23,7 @@
 #include "request_handler.hpp"
 
 namespace http {
-namespace server3 {
+namespace nube {
 
 /// The top-level class of the HTTP server.
 class server
@@ -58,7 +61,7 @@ private:
   request_handler request_handler_;
 };
 
-} // namespace server3
+} // namespace nube
 } // namespace http
 
-#endif // HTTP_SERVER3_SERVER_HPP
+#endif // HTTP_NUBE_SERVER_HPP

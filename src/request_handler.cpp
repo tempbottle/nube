@@ -1,7 +1,10 @@
 //
-// request_handler.cpp
-// ~~~~~~~~~~~~~~~~~~~
+// Nube
 //
+// A cloud scripting server based in Google V8 and Boost libraries.
+// Nube means cloud in Spanish.
+//
+// Based on original work by:
 // Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -18,7 +21,7 @@
 #include "request.hpp"
 
 namespace http {
-namespace server3 {
+namespace nube {
 
 request_handler::request_handler(const std::string& doc_root)
   : doc_root_(doc_root)
@@ -118,5 +121,5 @@ bool request_handler::url_decode(const std::string& in, std::string& out)
   return true;
 }
 
-} // namespace server3
+} // namespace nube
 } // namespace http

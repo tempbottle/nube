@@ -20,27 +20,12 @@
 #include "server.hpp"
 #include <pthread.h>
 #include <signal.h>
-#include <glog/logging.h>
 
 int main(int argc, char* argv[])
 {
-  // Using glog for logging
-  google::InitGoogleLogging(argv[0]);
-
-  LOG(INFO) << "Nube is starting..";
-
   try
   {
-    // Check command line arguments.
-    if (argc != 5)
-    {
-      std::cerr << "Usage: http_server <address> <port> <threads> <doc_root>\n";
-      std::cerr << "  For IPv4, try:\n";
-      std::cerr << "    receiver 0.0.0.0 80 1 .\n";
-      std::cerr << "  For IPv6, try:\n";
-      std::cerr << "    receiver 0::0 80 1 .\n";
-      return 1;
-    }
+    // Todo: add getops
 
     // Block all signals for background thread.
     sigset_t new_mask;
@@ -49,8 +34,8 @@ int main(int argc, char* argv[])
     pthread_sigmask(SIG_BLOCK, &new_mask, &old_mask);
 
     // Run server in background thread.
-    std::size_t num_threads = boost::lexical_cast<std::size_t>(argv[3]);
-    http::nube::server s(argv[1], argv[2], argv[4], num_threads);
+    std::size_t num_threads = boost::lexical_cast<std::size_t>(NUBE_NUM_THREADS);
+    http::nube::server s(NUBE_BIND_ADDRESS, NUBE_BIND_PORT, NUBE_DOC_ROOT, num_threads);
     boost::thread t(boost::bind(&http::nube::server::run, &s));
 
     // Restore previous signals.

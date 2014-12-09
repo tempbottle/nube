@@ -1,0 +1,8 @@
+httperf --server localhost \
+ --uri=/ \
+ --port=8181 \
+ --method=GET \
+ --num-conns=10000000 \
+ --num-calls=10000 \
+ --rate=100000 # --print-reply
+

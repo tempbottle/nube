@@ -14,6 +14,11 @@
 #ifndef HTTP_NUBE_SERVER_HPP
 #define HTTP_NUBE_SERVER_HPP
 
+#define NUBE_BIND_ADDRESS "127.0.0.1"
+#define NUBE_BIND_PORT    "8181"
+#define NUBE_NUM_THREADS  "10"
+#define NUBE_DOC_ROOT     "/tmp/"
+
 #include <boost/asio.hpp>
 #include <string>
 #include <vector>

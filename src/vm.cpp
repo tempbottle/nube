@@ -11,51 +11,6 @@
 using namespace v8; // but of course
 // using namespace internal;
 
-// we need a handle to return from script
-typedef v8::internal::Arguments Arguments;
-
-Handle<Value> send_response(void);
-
-Handle<Value> send_response(void) {
-
-    //if (args.Empty()) {
-   //     std::cout << "args is empty" << std::endl;
-    //}
-
-    /*
-
-    HandleScope scope;
-    v8::String::AsciiValue username(args[0]);
-    wc::TUserInfo ui = {0};
-
-    // return v8::Undefined();
-
-    v8::Handle<v8::Object> result = v8::Object::New();
-    result->Set(v8_str("Id"),    v8_num(ui.Id));
-    result->Set(v8_str("Name"),  v8_str(ui.Name));
-    result->Set(v8_str("Title"), v8_str(ui.Title));
-
-    scope.Close(result);
-    */
-}
-
-
-// work on this http://stackoverflow.com/questions/8992087/using-stringify-from-the-v8-shell
-/*
-Handle<Value> parseJson(Handle<Value> jsonString) {
-    HandleScope scope;
-
-    Handle<Context> context = Context::GetCurrent();
-    Handle<Object> global = context->Global();
-
-    Handle<Object> JSON = global->Get(String::New("JSON"))->ToObject();
-    Handle<Function> JSON_parse = Handle<Function>::Cast(JSON->Get(String::New("parse")));
-
-    // return JSON.parse.apply(JSON, jsonString);
-    return scope.Close(JSON_parse->Call(JSON, 1, &jsonString));
-}
-*/
-
 // main function
 int main(int argc, char* argv[]) {
 

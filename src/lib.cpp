@@ -7,18 +7,24 @@
 //
 
 #include <v8.h>
+#include <string>
+#include <vector>
+#include "lib.hpp"
 
-using namespace v8; // but of course
-// using namespace internal;
+using namespace v8;
+using namespace std;
 
 
 // constructor
 Nube::Nube(void) {
 
-    // should isolate be created here
+    // isolate should  be created here
+    isolate = Isolate::New();
+
     // exportFunctions = new vector<nube_export_func *>();
 }
 
+// destructor can be tricky
 Nube::~Nube(void) {
 
 }
@@ -33,12 +39,11 @@ void Nube::Log(const FunctionCallbackInfo<Value>& args){
 }
 
 // returns version
-Nube::Version(const FunctionCallbackInfo<Value>& args ){
-
+void Nube::Version(const FunctionCallbackInfo<Value>& args){
 }
 
 // fetch script from database
-Nube::FetchScript(const string& path) {
+void Nube::FetchScript(const string& path) {
     // path is a /organization/script url
 
 }
@@ -59,7 +64,7 @@ void Nube::Include(const FunctionCallbackInfo<Value>& args) {
 const string Nube::ExcuteScript(const string& scriptData, const string& scriptName, bool *resultError) {
 
     string res;
-    bool isError = false
+    bool isError = false;
 
     {
         Locker lock(isolate);
@@ -83,14 +88,16 @@ const string Nube::ExcuteScript(const string& scriptData, const string& scriptNa
             Local<Context> context = Context::New(isolate, NULL, global);
 
             if (context.IsEmpty()) {
-                return "Failed to create new JS context";
+                return "Failed to create new context";
             }
 
             // make the source
             Handle<String> source = String::NewFromUtf8(isolate, scriptData.c_str());
 
+            Local<String> scriptName = String::NewFromUtf8(isolate, "fooScript");
+
             // compile the script (should go on separate method);
-            Handle<Script> script = Script::Compile(source, Local<Value>::New(isolate, String::NewFromUtf8(isolate, fileName.c_str())));
+            Handle<Script> script = Script::Compile(source, Local<Value>::New(isolate, scriptName));
 
             // we should check exceptions but first wanna make it run
             Handle<Value> result = script->Run();
@@ -101,7 +108,8 @@ const string Nube::ExcuteScript(const string& scriptData, const string& scriptNa
             }
 
             // forces gc after execution
-            DisposeActiveInstances();
+            // not v8 defined
+            // DisposeActiveInstances();
         }
 
         isolate->SetData(0, NULL);

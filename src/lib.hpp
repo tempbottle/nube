@@ -10,17 +10,17 @@
 #include <string>
 #include <vector>
 
+using namespace std;
 using namespace v8;
 
 // needed macros
 // ...
 
+// lots of stuff borrowed from fs mod_v8
 
 // definitions
 #define js_safe_str(s) (s ? s : "")
 
-
-// stuff borrowed from fs mod_v8
 
 /* js constructor callback definition */
 typedef void * void_pointer_t;
@@ -28,19 +28,19 @@ typedef void_pointer_t (*ConstructorCallback)(const FunctionCallbackInfo<Value>&
 
 /* js constructor callback definition */
 typedef void * void_pointer_t;
-typedef void_pointer_t (*ConstructorCallback)(const v8::FunctionCallbackInfo<v8::Value>& info);
+typedef void_pointer_t (*ConstructorCallback)(const FunctionCallbackInfo<Value>& info);
 
 /* js function definition */
 typedef struct {
     const char *name;           /* Name of the function */
-    v8::FunctionCallback func;        /* Function callback */
+    FunctionCallback func;        /* Function callback */
 } js_function_t;
 
 /* js property definition */
 typedef struct {
     const char *name;           /* Name of the property */
-    v8::AccessorGetterCallback get;     /* The property getter */
-    v8::AccessorSetterCallback set;     /* The property setter */
+    AccessorGetterCallback get;     /* The property getter */
+    AccessorSetterCallback set;     /* The property setter */
 } js_property_t;
 
 /* js class definition */
@@ -59,14 +59,16 @@ private:
     Isolate* isolate;
 
     static void Log(const FunctionCallbackInfo<Value> &args);
-vector
-
+    static void FetchScript(const string& path);
+    const string ExcuteScript(const string& scriptData, const string& scriptName, bool *resultError);
     // vector of classes and functions
 
 public:
+
+    static void Include(const FunctionCallbackInfo<Value>& args);
+    static void Version(const FunctionCallbackInfo<Value>& args);
+
     Nube(void); // constructor
    ~Nube(void); // desctructor
-    
 
-
-}
+};

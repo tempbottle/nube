@@ -14,13 +14,13 @@ using namespace v8; // but of course
 // we need a handle to return from script
 typedef v8::internal::Arguments Arguments;
 
-Handle<Value> send_response(const Arguments &args);
+Handle<Value> send_response(void);
 
-Handle<Value> send_response(const Arguments &args) {
+Handle<Value> send_response(void) {
 
-    if (args.Empty()) {
-        std::cout << "args is empty" << std::endl;
-    }
+    //if (args.Empty()) {
+   //     std::cout << "args is empty" << std::endl;
+    //}
 
     /*
 
@@ -56,7 +56,6 @@ Handle<Value> parseJson(Handle<Value> jsonString) {
 }
 */
 
-
 // main function
 int main(int argc, char* argv[]) {
 
@@ -71,7 +70,8 @@ int main(int argc, char* argv[]) {
   {
     Isolate::Scope isolate_scope(isolate);
 
-
+    // Trying to use a locker
+    Locker lock(isolate);
 
     // Create a stack-allocated handle scope.
     HandleScope handle_scope(isolate);
@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
     Context::Scope context_scope(context);
 
     // Create a string containing the JavaScript source code.
-    Local<String> source = String::NewFromUtf8(isolate, "3 * 11");
+    Local<String> source = String::NewFromUtf8(isolate, "function foo() { return 3 * 11 }; foo();");
 
     // Name the script
     Local<String> name = String::NewFromUtf8(isolate, "fooScript");
@@ -97,10 +97,12 @@ int main(int argc, char* argv[]) {
     // Convert the result to an UTF8 string and print it.
     String::Utf8Value utf8(result);
     printf("%s\n", *utf8);
+
   }
-  
-  // Dispose the isolate and tear down V8.
+
   isolate->Dispose();
   V8::Dispose();
+  
+  // Dispose the isolate and tear down V8.
   return 0;
 }

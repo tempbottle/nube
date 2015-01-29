@@ -16,7 +16,6 @@
 #include <boost/bind.hpp>
 #include "request_handler.hpp"
 
-namespace http {
 namespace nube {
 
 connection::connection(boost::asio::io_service& io_service,
@@ -98,4 +97,3 @@ void connection::handle_write(const boost::system::error_code& e)
 }
 
 } // namespace nube
-} // namespace http

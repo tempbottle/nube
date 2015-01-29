@@ -16,11 +16,13 @@
 #include <sstream>
 #include <string>
 #include <boost/lexical_cast.hpp>
+#include <v8.h>
 #include "mime_types.hpp"
 #include "reply.hpp"
 #include "request.hpp"
 
-namespace http {
+using namespace v8;
+
 namespace nube {
 
 request_handler::request_handler(const std::string& doc_root)
@@ -30,6 +32,7 @@ request_handler::request_handler(const std::string& doc_root)
 
 void request_handler::handle_request(const request& req, reply& rep)
 {
+  /* 
   // Decode url to path.
   std::string request_path;
   if (!url_decode(req.uri, request_path))
@@ -62,24 +65,65 @@ void request_handler::handle_request(const request& req, reply& rep)
   }
 
   // Open the file to send back.
-  std::string full_path = doc_root_ + request_path;
+  std::string full_path = doc_root_ + request_path
   std::ifstream is(full_path.c_str(), std::ios::in | std::ios::binary);
   if (!is)
   {
     rep = reply::stock_reply(reply::not_found);
     return;
   }
+  */
 
-  // Fill out the reply to be sent to the client.
-  rep.status = reply::ok;
-  char buf[512];
-  while (is.read(buf, sizeof(buf)).gcount() > 0)
-    rep.content.append(buf, is.gcount());
-  rep.headers.resize(2);
-  rep.headers[0].name = "Content-Length";
-  rep.headers[0].value = boost::lexical_cast<std::string>(rep.content.size());
-  rep.headers[1].name = "Content-Type";
-  rep.headers[1].value = mime_types::extension_to_type(extension);
+
+
+  // Create a new Isolate and make it the current one.
+  Isolate* isolate = Isolate::New();
+  {
+    Isolate::Scope isolate_scope(isolate);
+
+    // Trying to use a locker
+    Locker lock(isolate);
+
+    // Create a stack-allocated handle scope.
+    HandleScope handle_scope(isolate);
+
+    // Create a new context.
+    Local<Context> context = Context::New(isolate);
+
+    // Enter the context for compiling and running the hello world script.
+    Context::Scope context_scope(context);
+
+    // Create a string containing the JavaScript source code.
+    Local<String> source = String::NewFromUtf8(isolate, "function foo() { return 3 * 11 }; foo();");
+
+    // Name the script
+    Local<String> name = String::NewFromUtf8(isolate, "fooScript");
+
+    // Compile the source code.
+    Local<Script> script = Script::Compile(source, name);
+
+    // Run the script to get the result.
+    Local<Value> result = script->Run();
+
+    // Convert the result to an UTF8 string and print it.
+    String::Utf8Value utf8(result);
+
+    // Fill out the reply to be sent to the client.
+    rep.status = reply::ok;
+    char buf[512];
+
+    rep.content.append(*utf8, 2);
+    rep.headers.resize(2);
+    rep.headers[0].name = "Content-Length";
+    rep.headers[0].value = boost::lexical_cast<std::string>(rep.content.size());
+    rep.headers[1].name = "Content-Type";
+    rep.headers[1].value = "text/html";
+    // rep.headers[1].value = mime_types::extension_to_type(extension);
+
+  }
+
+  isolate->Dispose();
+
 }
 
 bool request_handler::url_decode(const std::string& in, std::string& out)
@@ -122,4 +166,3 @@ bool request_handler::url_decode(const std::string& in, std::string& out)
 }
 
 } // namespace nube
-} // namespace http

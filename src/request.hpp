@@ -18,7 +18,6 @@
 #include <vector>
 #include "header.hpp"
 
-namespace http {
 namespace nube {
 
 /// A request received from a client.
@@ -32,6 +31,5 @@ struct request
 };
 
 } // namespace nube
-} // namespace http
 
 #endif // HTTP_NUBE_REQUEST_HPP

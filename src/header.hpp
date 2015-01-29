@@ -16,7 +16,6 @@
 
 #include <string>
 
-namespace http {
 namespace nube {
 
 struct header
@@ -26,6 +25,5 @@ struct header
 };
 
 } // namespace nube
-} // namespace http
 
 #endif // HTTP_NUBE_HEADER_HPP

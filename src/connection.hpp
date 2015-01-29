@@ -24,7 +24,6 @@
 #include "request_handler.hpp"
 #include "request_parser.hpp"
 
-namespace http {
 namespace nube {
 
 /// Represents a single connection from a client.
@@ -76,6 +75,5 @@ private:
 typedef boost::shared_ptr<connection> connection_ptr;
 
 } // namespace nube
-} // namespace http
 
 #endif // HTTP_NUBE_CONNECTION_HPP

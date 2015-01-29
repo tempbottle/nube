@@ -17,8 +17,8 @@
 #include <boost/shared_ptr.hpp>
 #include <vector>
 #include <iostream>
+#include <v8.h>
 
-namespace http {
 namespace nube {
 
 server::server(const std::string& address, const std::string& port,
@@ -28,11 +28,13 @@ server::server(const std::string& address, const std::string& port,
     new_connection_(new connection(io_service_, request_handler_)),
     request_handler_(doc_root)
 {
+
   // Open the acceptor with the option to reuse the address (i.e. SO_REUSEADDR).
   boost::asio::ip::tcp::resolver resolver(io_service_);
   boost::asio::ip::tcp::resolver::query query(address, port);
   boost::asio::ip::tcp::endpoint endpoint = *resolver.resolve(query);
 
+  // Set up acceptor, bind port, etc.
   acceptor_.open(endpoint.protocol());
   acceptor_.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
   acceptor_.bind(endpoint);
@@ -40,16 +42,24 @@ server::server(const std::string& address, const std::string& port,
   acceptor_.async_accept(new_connection_->socket(),
       boost::bind(&server::handle_accept, this,
         boost::asio::placeholders::error));
+
+  // Explicitly initialize V8 for later use
+  v8::V8::InitializeICU();
+  v8::V8::Initialize();
 }
 
 void server::run()
 {
   // Create a pool of threads to run all of the io_services.
   std::vector<boost::shared_ptr<boost::thread> > threads;
+
+
+  // Each thread should use one Isolate
+
+
   for (std::size_t i = 0; i < thread_pool_size_; ++i)
   {
-    boost::shared_ptr<boost::thread> thread(new boost::thread(
-          boost::bind(&boost::asio::io_service::run, &io_service_)));
+    boost::shared_ptr<boost::thread> thread(new boost::thread( boost::bind(&boost::asio::io_service::run, &io_service_)));
     threads.push_back(thread);
   }
 
@@ -61,6 +71,7 @@ void server::run()
 void server::stop()
 {
   io_service_.stop();
+  v8::V8::Dispose();
 }
 
 void server::handle_accept(const boost::system::error_code& e)
@@ -76,4 +87,3 @@ void server::handle_accept(const boost::system::error_code& e)
 }
 
 } // namespace nube
-} // namespace http

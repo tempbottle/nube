@@ -16,7 +16,6 @@
 
 #include <string>
 
-namespace http {
 namespace nube {
 namespace mime_types {
 
@@ -24,7 +23,6 @@ namespace mime_types {
 std::string extension_to_type(const std::string& extension);
 
 } // namespace mime_types
-} // namespace nube
 } // namespace http
 
 #endif // HTTP_NUBE_MIME_TYPES_HPP

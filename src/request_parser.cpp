@@ -14,7 +14,6 @@
 #include "request_parser.hpp"
 #include "request.hpp"
 
-namespace http {
 namespace nube {
 
 request_parser::request_parser()
@@ -326,4 +325,3 @@ bool request_parser::is_digit(int c)
 }
 
 } // namespace nube
-} // namespace http

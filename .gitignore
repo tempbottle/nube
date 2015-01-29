@@ -1,8 +1,10 @@
+nube
+vm
+
 # Compiled Object files
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -10,19 +12,11 @@
 
 # Compiled Dynamic libraries
 *.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
-*.exe
-*.out
-*.app
+a.out

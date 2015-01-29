@@ -17,7 +17,6 @@
 #include <boost/logic/tribool.hpp>
 #include <boost/tuple/tuple.hpp>
 
-namespace http {
 namespace nube {
 
 struct request;
@@ -94,6 +93,5 @@ private:
 };
 
 } // namespace nube
-} // namespace http
 
 #endif // HTTP_NUBE_REQUEST_PARSER_HPP

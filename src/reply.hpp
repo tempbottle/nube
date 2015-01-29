@@ -19,7 +19,6 @@
 #include <boost/asio.hpp>
 #include "header.hpp"
 
-namespace http {
 namespace nube {
 
 /// A reply to be sent to a client.
@@ -62,6 +61,5 @@ struct reply
 };
 
 } // namespace nube
-} // namespace http
 
 #endif // HTTP_NUBE_REPLY_HPP

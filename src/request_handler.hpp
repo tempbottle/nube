@@ -17,7 +17,6 @@
 #include <string>
 #include <boost/noncopyable.hpp>
 
-namespace http {
 namespace nube {
 
 struct reply;
@@ -44,6 +43,5 @@ private:
 };
 
 } // namespace nube
-} // namespace http
 
 #endif // HTTP_NUBE_REQUEST_HANDLER_HPP

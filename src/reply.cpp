@@ -15,7 +15,6 @@
 #include <string>
 #include <boost/lexical_cast.hpp>
 
-namespace http {
 namespace nube {
 
 namespace status_strings {
@@ -256,4 +255,3 @@ reply reply::stock_reply(reply::status_type status)
 }
 
 } // namespace nube
-} // namespace http
